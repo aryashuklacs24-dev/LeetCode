@@ -6,7 +6,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             int[] temp = new int[n - 1];
             int idx = 0;
-            
+
             for (int j = 0; j < n; j++) {
                 if (j != i) {
                     temp[idx++] = nums[j];
@@ -20,7 +20,7 @@ class Solution {
         return false;
     }
 
-    private boolean isIncreasing(int[] arr) {
+    public static boolean isIncreasing(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] <= arr[i - 1]) {
                 return false;
