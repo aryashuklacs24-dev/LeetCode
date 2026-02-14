@@ -1,13 +1,18 @@
 class Solution {
     public int diagonalSum(int[][] mat) {
-        int s=0;
-        for(int i=0;i<mat.length;i++){
-            for(int j=0;j<mat[0].length;j++){
-                if(i==j||i+j==mat.length-1){
-                    s+=mat[i][j];
-                }
-            }
+        int n = mat.length;
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum += mat[i][i];           // primary diagonal
+            sum += mat[i][n - 1 - i];   // secondary diagonal
         }
-        return s;
+
+        // remove middle element if n is odd
+        if (n % 2 == 1) {
+            sum -= mat[n / 2][n / 2];
+        }
+
+        return sum;
     }
 }
