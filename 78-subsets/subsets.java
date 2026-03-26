@@ -9,13 +9,12 @@ class Solution {
     }
     public static void fun(int[]arr,int idx,List<Integer>temp,List<List<Integer>>res){
         
-            res.add(new ArrayList<>(temp));
+        res.add(new ArrayList<>(temp));
             
         for(int i=idx;i<arr.length;i++){
             temp.add(arr[i]);
-            fun(arr, i
-                +1, temp, res);
-                temp.remove(temp.size()-1);
+            fun(arr, i+1, temp, res);
+            temp.remove(temp.size()-1);
         }
     }
 }
