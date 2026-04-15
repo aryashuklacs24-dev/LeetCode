@@ -9,12 +9,10 @@ class Solution {
                 }
                 ans += s.charAt(j);
             }
-
             if(ans.length() > max){
                 max = ans.length();
             }
         }
-
         return max;
     }
 }
