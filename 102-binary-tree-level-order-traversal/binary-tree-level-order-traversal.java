@@ -34,7 +34,6 @@
                 res.add(curr);
                 curr = new ArrayList<>();
 
-                // If queue still has nodes, mark the next level
                 if (!q.isEmpty()) {
                     q.offer(null);
                 }
