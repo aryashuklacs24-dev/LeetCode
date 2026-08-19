@@ -13,44 +13,37 @@
  *     }
  * }
  */
-
- class Solution {
+class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
 
-        if (root == null) return res;
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
 
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        q.offer(null);
+        inorder(root, 0, map);
 
-        List<Integer> curr = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
 
-        while (!q.isEmpty()) {
+        int level = 0;
 
-            TreeNode current = q.poll();
-
-            if (current == null) {
-                res.add(curr);
-                curr = new ArrayList<>();
-
-                if (!q.isEmpty()) {
-                    q.offer(null);
-                }
-            } 
-            else {
-                curr.add(current.val);
-
-                if (current.left != null) {
-                    q.offer(current.left);
-                }
-
-                if (current.right != null) {
-                    q.offer(current.right);
-                }
-            }
+        while (map.containsKey(level)) {
+            ans.add(map.get(level));
+            level++;
         }
 
-        return res;
+        return ans;
+    }
+
+    public static void inorder(TreeNode root, int level,HashMap<Integer, List<Integer>> map) {
+
+        if (root == null) {
+            return;
+        }
+        inorder(root.left, level + 1, map);
+
+        if (!map.containsKey(level)) {
+            map.put(level, new ArrayList<>());
+        }
+        map.get(level).add(root.val);
+
+        inorder(root.right, level + 1, map);
     }
 }
