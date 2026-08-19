@@ -15,35 +15,21 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-
-        HashMap<Integer, List<Integer>> map = new HashMap<>();
-
-        inorder(root, 0, map);
-
-        List<List<Integer>> ans = new ArrayList<>();
-
-        int level = 0;
-
-        while (map.containsKey(level)) {
-            ans.add(map.get(level));
-            level++;
-        }
-
-        return ans;
+        List<List<Integer>> arr=new ArrayList<>();
+        pre(root,arr,0);
+        return arr;
     }
-
-    public static void inorder(TreeNode root, int level,HashMap<Integer, List<Integer>> map) {
-
-        if (root == null) {
+    public static void pre(TreeNode root,List<List<Integer>> arr,int level){
+        if(root==null){
             return;
         }
-        inorder(root.left, level + 1, map);
-
-        if (!map.containsKey(level)) {
-            map.put(level, new ArrayList<>());
+        if(level==arr.size()){
+            arr.add(new ArrayList<>());
         }
-        map.get(level).add(root.val);
 
-        inorder(root.right, level + 1, map);
+        arr.get(level).add(root.val);
+        pre(root.left,arr,level+1);
+        pre(root.right,arr,level+1);
+
     }
 }
