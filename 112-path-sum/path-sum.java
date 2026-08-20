@@ -14,33 +14,27 @@
  * }
  */
 class Solution {
-    public boolean hasPathSum(TreeNode root, int targetSum) {
-        List<Integer>path=new ArrayList<>();
-        return sum(root,targetSum,path);
+    public boolean hasPathSum(TreeNode root, int targetSum) { 
+        return sum(root,targetSum);
     }
-    public static boolean sum(TreeNode root,int targetSum,List<Integer>path){
-        int t=targetSum;
+    public static boolean sum(TreeNode root,int t){
+        // int t=targetSum;
         if(root==null){
             return false;
         }
-
         t-=root.val;
-        path.add(root.val);
-
         if(root.left==null &&root.right ==null){
         if(t==0){
             return true;
         }
     }
-        if(sum(root.left,t,path)){
+        if(sum(root.left,t)){
             return true;
         }
-        if(sum(root.right,t,path)){
+        if(sum(root.right,t)){
             return true;
         }
 
-        // t+=path.size(-1);
-        path.remove(path.size()-1);
         return false;
     }
 }
