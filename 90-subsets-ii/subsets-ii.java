@@ -8,11 +8,6 @@ class Solution {
         return result;
     }
     public static void fun(int[]arr,int idx,List<Integer>temp,List<List<Integer>>res){
-        // if(arr[idx]==arr[idx-1]){
-        //     continue;
-        // }
-        // for(int i=idx;i<temp.size)
-       
             res.add(new ArrayList<>(temp));
             
         for(int i=idx;i<arr.length;i++){
