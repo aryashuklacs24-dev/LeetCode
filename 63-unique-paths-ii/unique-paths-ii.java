@@ -1,37 +1,35 @@
 class Solution {
-    public int uniquePathsWithObstacles(int[][] arr) {
-        if(arr[0][0]==1){
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int n = obstacleGrid.length;
+        int m = obstacleGrid[0].length;
+        int[][] dp = new int[n][m];
+        for(int i = 0; i < n; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+
+        return backtrack(obstacleGrid, 0, 0, dp);
+    }
+
+    public int backtrack(int[][] grid, int cr, int cc, int[][] dp) {
+
+        int er = grid.length;
+        int ec = grid[0].length;
+        if(cr >= er || cc >= ec || grid[cr][cc] == 1) {
             return 0;
         }
-        arr[0][0]=1;
-        int m=arr.length;
-        int n=arr[0].length;
-        for(int i=1;i<m;i++){
-            if(arr[i][0]==1){
-                arr[i][0]=0;
-            }
-            else{
-                arr[i][0]=arr[i-1][0];
-            }
+        if(cr == er - 1 && cc == ec - 1) {
+            return 1;
         }
-        for(int j=1;j<n;j++){
-            if(arr[0][j]==1){
-                arr[0][j]=0;
-            }
-            else{
-                arr[0][j]=arr[0][j-1];
-            }
+        if(dp[cr][cc] != -1) {
+            return dp[cr][cc];
         }
-        for(int i=1;i<m;i++){
-            for(int j=1;j<n;j++){
-                if(arr[i][j]==1){
-                    arr[i][j]=0;
-                }
-                else{
-                    arr[i][j]=arr[i-1][j]+arr[i][j-1];
-                }
-            }
-        }
-        return arr[m-1][n-1];
+
+        int cnt = 0;
+        cnt += backtrack(grid, cr + 1, cc, dp);
+        cnt += backtrack(grid, cr, cc + 1, dp);
+
+        dp[cr][cc] = cnt;
+
+        return cnt;
     }
 }
