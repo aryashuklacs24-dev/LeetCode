@@ -14,7 +14,7 @@ class Solution {
 
         if (md < cl) {
             ans.add(root.val);
-            md = cl;
+            md++;
         }
 
         rightview(root.right, cl + 1, ans);
