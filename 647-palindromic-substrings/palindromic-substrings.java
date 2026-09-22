@@ -1,26 +1,28 @@
 class Solution {
     public int countSubstrings(String s) {
-        int n=s.length();
-        int count=0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                if (isPalindrome(s, i, j)) {
-                    count++;
+        return palindromic_sub(s);
+    }
+    public static int palindromic_sub(String s){
+        
+        int odd=0;
+        for(int i=0;i<s.length();i++){
+            for (int j = 0; i-j>=0&&j+i<s.length() ; j++) {
+                if(s.charAt(i-j)!=s.charAt(i+j)){
+                    break;
                 }
+                odd++;
             }
         }
-
-     return count;
-    }
-
-    private static boolean isPalindrome(String s, int l, int r) {
-        while (l < r) {
-            if (s.charAt(l) != s.charAt(r))
-                return false;
-            l++;
-            r--;
+       
+        int even=0;
+        for(double i=0.5;i<s.length();i++){
+            for (double j = 0.5; i-j>=0&&j+i<s.length() ; j++) {
+                if(s.charAt((int)(i-j))!=s.charAt((int)(i+j))){
+                    break;
+                }
+                even++;
+            }
         }
-        return true;
-    
+        return odd+even;
     }
 }
