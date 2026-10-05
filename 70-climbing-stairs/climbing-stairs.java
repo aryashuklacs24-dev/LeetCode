@@ -1,19 +1,27 @@
 class Solution {
     public int climbStairs(int n) {
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, -1);
 
-        if (n <= 2) {
-            return n;
+        return fun(n, 0, dp);
+    }
+
+    public static int fun(int n, int sum, int[] dp) {
+
+        if (sum == n) {
+            return 1;
         }
 
-        int a = 1;
-        int b = 2;
-
-        for (int i = 3; i <= n; i++) {
-            int c = a + b;
-            a = b;
-            b = c;
+        if (sum > n) {
+            return 0;
         }
 
-        return b;
+        if (dp[sum] != -1) {
+            return dp[sum];
+        }
+
+        dp[sum] = fun(n, sum + 1, dp) + fun(n, sum + 2, dp);
+
+        return dp[sum];
     }
 }
