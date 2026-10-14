@@ -1,23 +1,28 @@
 class Solution {
     public int minPathSum(int[][] grid) {
-        if(grid==null||grid.length==0||grid[0].length==0){
-            return 0;
+        int[][]dp=new int[grid.length][grid[0].length];
+        for(int[]row:dp){
+            Arrays.fill(row,-1);
         }
-        int r=grid.length;
-        int c=grid[0].length;
-        int[][]dp=new int[r][c];
-        dp[0][0]=grid[0][0];
-        for(int i=1;i<r;i++){
-            dp[i][0]=dp[i-1][0]+grid[i][0];
+        return fun(grid,0,0,dp);
+
+
+    }
+
+    public static int fun(int[][]arr,int i,int j,int[][]dp){
+        if(i==arr.length-1&&j==arr[0].length-1){
+            return arr[i][j];
         }
-        for(int j=1;j<c;j++){
-            dp[0][j]=dp[0][j-1]+grid[0][j];
+        if(i>=arr.length || j>=arr[0].length){
+            return Integer.MAX_VALUE;
         }
-        for(int i=1;i<r;i++){
-            for(int j=1;j<c;j++){
-                dp[i][j]=grid[i][j]+ Math.min(dp[i-1][j],dp[i][j-1]);
-            }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
         }
-        return dp[r-1][c-1];
+
+        int r=fun(arr,i,j+1,dp);
+        int d=fun(arr,i+1,j,dp);
+        return dp[i][j]=arr[i][j]+Math.min(r,d);
+
     }
 }
