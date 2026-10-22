@@ -3,60 +3,43 @@ class Solution {
     public void solveSudoku(char[][] board) {
         Print(board, 0, 0);
     }
-
     public static boolean Print(char[][] grid, int row, int col) {
-
         if (col == 9) {
             row++;
             col = 0;
         }
-
         if (row == 9) {
             return true;
         }
-
         if (grid[row][col] != '.') {
             return Print(grid, row, col + 1);
         }
-
         else {
             for (char val = '1'; val <= '9'; val++) {
-
                 if (isitsafe(grid, row, col, val)) {
-
                     grid[row][col] = val;
-
                     boolean ans = Print(grid, row, col + 1);
-
                     if (ans) {
                         return true;
                     }
-
                     grid[row][col] = '.';
                 }
             }
         }
-
         return false;
     }
 
     public static boolean isitsafe(char[][] grid, int row, int col, char val) {
-
-        // row check
         for (int i = 0; i < 9; i++) {
             if (grid[row][i] == val) {
                 return false;
             }
         }
-
-        // column check
         for (int i = 0; i < 9; i++) {
             if (grid[i][col] == val) {
                 return false;
             }
         }
-
-        // 3x3 box check
         int r = row - row % 3;
         int c = col - col % 3;
 
@@ -67,7 +50,6 @@ class Solution {
                 }
             }
         }
-
         return true;
     }
 }
